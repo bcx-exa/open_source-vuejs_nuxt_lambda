@@ -1,0 +1,34 @@
+Resources:
+  WebsiteRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      RoleName: ${env:APP_NAME}-Role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+                - codebuild.amazonaws.com
+                - codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ${env:APP_NAME}-Policy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - '*'
+                  # - "rds:*"
+                  # - "rds-data:*"
+                  # - "ec2:*"
+                  # - "cloudwatch:*"
+                  # - "sns:*"
+                  # - "ses:*"
+                  # - "xray:*"
+                  # - "cloudformation:*"
+                Resource:
+                  - '*'

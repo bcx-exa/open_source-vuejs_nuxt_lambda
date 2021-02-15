@@ -1,0 +1,51 @@
+service: serverless-side-rendering-vue-nuxt
+
+plugins:
+  - serverless-apigw-binary
+  - serverless-dotenv-plugin
+  - serverless-domain-manager
+
+custom:
+  dotenv:
+    basePath: ./environments/
+    exclude: # By default dotenv will add the env to your functions
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - RUN_LOCAL
+  customDomain:
+    domainName: ${self:provider.environment.CUSTOM_DOMAIN}
+    stage: ${self:provider.stage}
+    certificateName: ${self:provider.environment.CUSTOM_DOMAIN}
+    createRoute53Record: true
+    endpointType: 'edge'
+    securityPolicy: tls_1_2
+    apiType: rest
+    autoDomain: true
+  apigwBinary:
+    types:
+      - '*/*'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${env:STAGE}
+  region: ${env:REGION}
+  profile: ${env:AWS_PROFILE}
+  role: WebsiteRole
+  timeout: 20
+  environment:
+    NODE_ENV: ${env:NODE_ENV}
+    CUSTOM_DOMAIN: ${env:DOMAIN}
+
+resources:
+  - Resources:
+  - ${file(iac/resources/iam.serverless.yml)}
+  - ${file(iac/cicd/codebuild.serverless.yml)}
+  - ${file(iac/cicd/codepipeline.serverless.yml)}
+
+functions:
+  nuxt:
+    handler: index.nuxt
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}

@@ -1,0 +1,29 @@
+Resources:
+  CodeBuild:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: ${self:service.name}
+      Description: This is the codebuild project for the ${env:APP_NAME}
+      ServiceRole:
+        Fn::GetAtt:
+          - WebsiteRole
+          - Arn
+      Artifacts:
+        Type: CODEPIPELINE
+        Name: ${self:service.name}-build
+        Packaging: NONE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: 'aws/codebuild/standard:4.0'
+        EnvironmentVariables:
+          - Name: GITHUB_TOKEN
+            Value: ${env:GITHUB_TOKEN}
+          - Name: NODE_ENV
+            Value: ${env:NODE_ENV}
+          - Name: REGION
+            Value: ${env:REGION}
+          - Name: RUN_LOCAL
+            Value: true
+      Source:
+        Type: CODEPIPELINE
