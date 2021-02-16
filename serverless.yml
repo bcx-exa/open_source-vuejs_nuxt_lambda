@@ -40,8 +40,8 @@ provider:
 resources:
   - Resources:
   - ${file(iac/resources/iam.serverless.yml)}
-  - ${file(iac/cicd/codebuild.serverless.yml)}
-  - ${file(iac/cicd/codepipeline.serverless.yml)}
+  # - ${file(iac/cicd/codebuild.serverless.yml)}
+  # - ${file(iac/cicd/codepipeline.serverless.yml)}
 
 functions:
   nuxt:
