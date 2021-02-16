@@ -116,7 +116,7 @@ npm run deploy:prod
 
 ---
 
-1. Adding CICD (Optional)
+8. Adding CICD (Optional)
 
 8.1 If you would like the respective environments to build and deploy automatically when you commit to the respective branch, assuming you are using Github, comment out the following lines in the serverless.yml file.
 
