@@ -27,6 +27,10 @@ Resources:
             Value: ${env:NODE_ENV}
           - Name: REGION
             Value: ${env:REGION}
+          - Name: AWS_ACCESS_KEY_ID
+            Value: ${env:AWS_ACCESS_KEY_ID}
+          - Name: AWS_SECRET_ACCESS_KEY
+            Value: ${env:AWS_SECRET_ACCESS_KEY}
           - Name: RUN_LOCAL
             Value: true
       Source:
