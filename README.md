@@ -15,7 +15,7 @@ This specific piece of code allows you to run a server-side website using Vue.js
 - Our demo site runs for under $1 a month. $0.58 to be exact.
 - The domain is $12 per year.
 - The initial deployment takes less than 1 hour.
-- Subsequent deployments take less than 10 min.
+- Subsequent deployments take less than 5 min.
 
 > Warning: Pricing might vary depending on the amount of traffic hitting your website. See AWS Lambda & API Gateway pricing to understand what YOUR true cost would be.
 
@@ -134,6 +134,8 @@ resources:
 GITHUB_OWNER=<OWNER OF REPO NAME>
 GITHUB_REPO=<YOUR REPO NAME>
 GITHUB_TOKEN=<YOUR GITHUB TOKEN>
+AWS_ACCESS_KEY_ID=<YOUR ACCESS KEY ID>
+AWS_SECRET_ACCESS_KEY=<YOUR SECRET KEY ID>
 ```
 
 ### Destroying environments Dev/UAT/Prod
