@@ -2,7 +2,7 @@
 
 ![bcxexa](docs/assets/exa_backgrond.jpg)
 
-• [Website](https://www.bcx.co.za/exa/) • [Docs](docs/architecture/architecture.svg)
+• [Website](https://www.bcx.co.za/exa/)
 
 ## Introduction
 
@@ -13,13 +13,15 @@ As part of the BCX Exa open-source initiative, we would like to give back to the
 This specific piece of code allows you to run a server-side website using Vue.js and Nuxt on AWS Lambda.
 
 - Our demo site runs for under $1 a month. $0.58 to be exact.
-- The domain costs us $13 per year.
+- The domain is $12 per year.
+- The initial deployment takes less than 1 hour.
+- Subsequent deployments take less than 10 min.
 
 > Warning: Pricing might vary depending on the amount of traffic hitting your website. See AWS Lambda & API Gateway pricing to understand what YOUR true cost would be.
 
 ---
 
-## Main Components in Tech-Stack
+## Main Components in Tech Stack
 
 - Vue.js
 - Nuxt
@@ -29,6 +31,7 @@ This specific piece of code allows you to run a server-side website using Vue.js
 - AWS Route 53
 - Serverless Framework
 - Github with CodeBuild & CodePipeline
+- D3
 
 ---
 
@@ -45,7 +48,7 @@ This specific piece of code allows you to run a server-side website using Vue.js
 
 > Note: In some instances you need to restart your machine after installing these packages.
 
-2.  Install Serverless globally
+2.  Install Serverless and Cross-env globally
 
 ```bash
 npm install -g serverless && npm install -g cross-env
@@ -57,7 +60,7 @@ npm install -g serverless && npm install -g cross-env
 npm install
 ```
 
-4. Configure your correct AWS profile
+4. Configure your AWS profile
 
 ```bash
 aws configure --profile <YOUR_AWS_PROFILE_NAME>
@@ -69,17 +72,15 @@ aws configure --profile <YOUR_AWS_PROFILE_NAME>
 npm run dev
 ```
 
-5. Create a domain using Route53
-
-> Warning: On completion of this step, it will start costing you some money.
+5. Create a domain using Route53, see link below on how to do this.
 
 - https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html
+
+> Warning: On completion of this step, it will start costing you money.
 
 After creating your domain, Route53 will create the Hosted Zone automatically. It generally takes about 15-30 min for this step to complete.
 
 6. Configure your env variables inside your environments folder.
-
-Filenames
 
 - .env.dev
 - .env.uat
@@ -110,12 +111,12 @@ npm run deploy:prod
 
 ### Deployment Notes
 
-> Note: Lambda cold start plays a role in showing the initial load of your website. Consider running serverless-plugin-warmup in production to keep your response times low.
-> Note: Validation of your certificate might take up to 40 min. To fast track the process, log into the aws console and create the CNAME in Route53 manually.
+- Note: Lambda cold start plays a role in showing the initial load of your website. Consider running serverless-plugin-warmup in production to keep your response times low.
+- Note: On initial deployment, the automated process to validation your certificate might take up to 40 min, To fast track the process, log into the aws console and create the CNAME in Route53 manually. The certificate will be created in N. Virgina inside Certificate Manager.
 
 ---
 
-8. Adding CICD (Optional)
+1. Adding CICD (Optional)
 
 8.1 If you would like the respective environments to build and deploy automatically when you commit to the respective branch, assuming you are using Github, comment out the following lines in the serverless.yml file.
 
@@ -127,7 +128,7 @@ resources:
   # - ${file(iac/cicd/codepipeline.serverless.yml)}
 ```
 
-8.2 Create a file in the environments folder called .env.local
+8.2 Create a file in the environments folder called .env.local and add the following to the file.
 
 ```
 GITHUB_OWNER=<OWNER OF REPO NAME>
