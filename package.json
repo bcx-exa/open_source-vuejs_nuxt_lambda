@@ -12,9 +12,9 @@
     "deploy:dev": "npm run build && cross-env NODE_ENV=dev sls deploy --config iac/resources/acm.serverless.yml && cross-env NODE_ENV=dev sls deploy",
     "deploy:uat": "npm run build && cross-env NODE_ENV=dev sls deploy --config iac/resources/acm.serverless.yml && cross-env NODE_ENV=uat sls deploy",
     "deploy:prod": "npm run build && cross-env NODE_ENV=dev sls deploy --config iac/resources/acm.serverless.yml && cross-env NODE_ENV=prod sls deploy",
-    "destroy:dev": "npm run build && cross-env NODE_ENV=dev sls remove",
-    "destroy:uat": "npm run build && cross-env NODE_ENV=uat sls remove",
-    "destroy:prod": "npm run build && cross-env NODE_ENV=prod sls remove",
+    "destroy:dev": "cross-env NODE_ENV=dev sls remove && cross-env NODE_ENV=dev sls remove --config iac/resources/acm.serverless.yml",
+    "destroy:uat": "cross-env NODE_ENV=uat sls remove && cross-env NODE_ENV=uat sls remove --config iac/resources/acm.serverless.yml",
+    "destroy:prod": "cross-env NODE_ENV=prod sls remove && cross-env NODE_ENV=prod sls remove --config iac/resources/acm.serverless.yml",
     "start-server": "npm run build && node nuxt-app.js",
     "start-sls": "npm run build && sls offline start"
   },
