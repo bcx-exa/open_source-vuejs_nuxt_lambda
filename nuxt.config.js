@@ -3,11 +3,11 @@
 module.exports = {
   mode: 'universal',
   head: {
-    title: 'Vue Nuxt Test',
+    title: 'BCX Exa',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Real Aqua' },
+      { hid: 'description', name: 'description', content: 'BCX Exa Demo App' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
