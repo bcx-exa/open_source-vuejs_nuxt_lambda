@@ -1,3 +1,4 @@
+# Testing still
 Resources:
   CodeBuild:
     Type: 'AWS::CodeBuild::Project'
@@ -19,10 +20,20 @@ Resources:
         EnvironmentVariables:
           - Name: GITHUB_TOKEN
             Value: ${env:GITHUB_TOKEN}
+          - Name: GITHUB_OWNER
+            Value: ${env:GITHUB_OWNER}
+          - Name: GITHUB_REPO
+            Value: ${env:GITHUB_REPO}
           - Name: NODE_ENV
             Value: ${env:NODE_ENV}
           - Name: REGION
             Value: ${env:REGION}
+          - Name: AWS_PROFILE
+            Value: ${env:AWS_PROFILE}
+          - Name: AWS_ACCESS_KEY_ID
+            Value: ${env:AWS_ACCESS_KEY_ID}
+          - Name: AWS_SECRET_ACCESS_KEY
+            Value: ${env:AWS_SECRET_ACCESS_KEY}
           - Name: RUN_LOCAL
             Value: true
       Source:
