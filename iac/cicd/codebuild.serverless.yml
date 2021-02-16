@@ -19,6 +19,10 @@ Resources:
         EnvironmentVariables:
           - Name: GITHUB_TOKEN
             Value: ${env:GITHUB_TOKEN}
+          - Name: GITHUB_OWNER
+            Value: ${env:GITHUB_OWNER}
+          - Name: GITHUB_REPO
+            Value: ${env:GITHUB_REPO}
           - Name: NODE_ENV
             Value: ${env:NODE_ENV}
           - Name: REGION
